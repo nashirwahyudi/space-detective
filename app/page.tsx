@@ -332,7 +332,7 @@ export default function Chat(props: { apiKeyApp: string }) {
                 height="20px"
                 color={gray}
               />
-            </Flex>
+            </Flex> 
           </Flex>
           <Flex w="100%">
             <Flex
