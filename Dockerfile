@@ -1,12 +1,12 @@
 # ----- Stage 1: Build -----
-FROM registry.cn-hangzhou.aliyuncs.com/libraries/node:18-alpine AS builder
+FROM node:18-alpine AS builder
 
 # Set working directory
 WORKDIR /app
 
 # Copy package.json and install dependencies
 COPY package.json package-lock.json* pnpm-lock.yaml* yarn.lock* ./
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 # Copy the rest of the source
 COPY . .
@@ -15,7 +15,7 @@ COPY . .
 RUN npm run build
 
 # ----- Stage 2: Run -----
-FROM registry.cn-hangzhou.aliyuncs.com/libraries/node:18-alpine
+FROM node:18-alpine
 
 # Set working directory
 WORKDIR /app

@@ -23,7 +23,8 @@ import { useEffect, useState } from 'react';
 import { MdAutoAwesome, MdBolt, MdEdit, MdPerson } from 'react-icons/md';
 import Bg from '../../public/img/chat/bg-image.png';
 
-export default function Chat(props: { apiKeyApp: string }) {
+// export default function Chat(props: { apiKeyApp: string }) {
+export default function Chat() {
   // Input States
   const [inputOnSubmit, setInputOnSubmit] = useState<string>('');
   const [inputCode, setInputCode] = useState<string>('');

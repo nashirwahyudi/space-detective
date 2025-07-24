@@ -28,7 +28,7 @@ export function NextAvatar({
                   }
                 : {})}
             alt={alt}
-            objectFit={'fill'}
+            // objectFit={'fill'}
             src={src}
             style={{ ...style, borderRadius: '50%' }}
         />
