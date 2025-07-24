@@ -1,5 +1,5 @@
 # ----- Stage 1: Build -----
-FROM registry.cn-hangzhou.aliyuncs.com/docker_library/node:20-alpine AS builder
+FROM alibaba-cloud-linux-3-registry.cn-hangzhou.cr.aliyuncs.com/alinux3/node:20.16 AS builder
 
 # Set working directory
 WORKDIR /app
@@ -15,7 +15,7 @@ COPY . .
 RUN npm run build
 
 # ----- Stage 2: Run -----
-FROM registry.cn-hangzhou.aliyuncs.com/docker_library/node:20-alpine
+FROM alibaba-cloud-linux-3-registry.cn-hangzhou.cr.aliyuncs.com/alinux3/node:20.16
 
 # Set working directory
 WORKDIR /app
