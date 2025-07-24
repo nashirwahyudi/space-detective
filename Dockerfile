@@ -1,5 +1,5 @@
 # ----- Stage 1: Build -----
-FROM registry.cn-hangzhou.aliyuncs.com/libraries/node:18-alpine AS builder
+FROM node:18-alpine AS builder
 
 # Set working directory
 WORKDIR /app
@@ -15,7 +15,7 @@ COPY . .
 RUN npm run build
 
 # ----- Stage 2: Run -----
-FROM registry.cn-hangzhou.aliyuncs.com/libraries/node:18-alpine
+FROM node:18-alpine
 
 # Set working directory
 WORKDIR /app
