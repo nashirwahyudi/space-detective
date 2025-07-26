@@ -11,7 +11,7 @@ export const findCurrentRoute = (
       const found = findCurrentRoute(route.items, pathname);
       if (found) return found;
     }
-    if (pathname?.match(route.path) && route) {
+    if (pathname === route.path && route) {
       return route;
     }
   }
