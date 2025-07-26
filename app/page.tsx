@@ -5,24 +5,20 @@ import Link from '@/components/link/Link';
 import MessageBoxChat from '@/components/MessageBox';
 import { ChatBody, OpenAIModel } from '@/types/types';
 import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  Box,
-  Button,
   Card,
   Flex,
-  Icon,
-  Img,
-  Input,
-  Text,
+  Table,
+  TableCaption,
+  TableContainer,
+  Tbody,
+  Td,
+  Tfoot,
+  Th,
+  Thead,
+  Tr,
   useColorModeValue,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { MdAutoAwesome, MdBolt, MdEdit, MdPerson } from 'react-icons/md';
-import Bg from '../public/img/chat/bg-image.png';
 
 // export default function Chat(props: { apiKeyApp: string }) {
 export default function Dashboard() {
@@ -172,7 +168,7 @@ export default function Dashboard() {
           <Card
             display={'flex'}
             px="22px !important"
-            pl="22px !important"
+            py="22px !important"
             w={'100%'}
             h={'100%'}
             color={textColor}
@@ -188,19 +184,47 @@ export default function Dashboard() {
             display={'flex'}
             px="22px !important"
             w={'100%'}
-            pl="22px !important"
+            py="22px !important"
             h={{base: '50%'}}
             color={textColor}
             fontSize={{ base: 'sm', md: 'md' }}
             lineHeight={{ base: '24px', md: '26px' }}
             fontWeight="500"
           >
-            Tabel checklist
+            {/* Tabel checklist */}
+            <TableContainer>
+              <Table variant='striped' size='md'>
+                <Thead>
+                  <Tr>
+                    <Th>Highlight</Th>
+                    <Th isNumeric>2022</Th>
+                    <Th isNumeric>2023</Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  <Tr>
+                    <Td>Provinsi A</Td>
+                    <Td isNumeric>0.7</Td>
+                    <Td isNumeric>0.76</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Provinsi B</Td>
+                    <Td isNumeric>0.97</Td>
+                    <Td isNumeric>0.62</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Provinsi C</Td>
+                    <Td isNumeric>0.34</Td>
+                    <Td isNumeric>0.63</Td>
+                  </Tr>
+                </Tbody>
+              </Table>
+            </TableContainer>
           </Card>
           <Card
             display={'flex'}
             px="22px !important"
-            pl="22px !important"
+            py="22px !important"
             h={{base: '50%'}}
             w={'100%'}
             color={textColor}
