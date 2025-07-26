@@ -1,10 +1,11 @@
 'use client';
 /*eslint-disable*/
 
-import Link from '@/components/link/Link';
-import MessageBoxChat from '@/components/MessageBox';
 import { ChatBody, OpenAIModel } from '@/types/types';
+// import Map from '@/components/statistic/Map';
+import MapProvider from '@/lib/maplibre/profider';
 import {
+  Box,
   Card,
   Flex,
   Table,
@@ -18,10 +19,12 @@ import {
   Tr,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // export default function Chat(props: { apiKeyApp: string }) {
 export default function Dashboard() {
+  // reg
+  const mapContainerRef = useRef<HTMLDivElement | null>(null);
   // Input States
   const [inputOnSubmit, setInputOnSubmit] = useState<string>('');
   const [inputCode, setInputCode] = useState<string>('');
@@ -176,7 +179,22 @@ export default function Dashboard() {
             lineHeight={{ base: '24px', md: '26px' }}
             fontWeight="500"
           >
-            Peta Buta
+            {/* <Map/> */}
+            <Box 
+              id="map-container"
+              ref={mapContainerRef}
+              w={'100%'}
+              h={'100%'}
+              display='absolute'
+              inset={0}>
+              <MapProvider 
+              mapContainerRef={mapContainerRef}
+              initialViewState={{
+                longitude: -122.4194,
+                latitude: 37.7749,
+                zoom: 10,
+              }}></MapProvider>
+            </Box>
           </Card>
         </Flex>
         <Flex direction={'column'} h={{ base: '75vh', '2xl': '85vh' }} w="50%" mb={'auto'} gap='5'>

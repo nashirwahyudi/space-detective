@@ -89,14 +89,15 @@ function APIModal(props: { setApiKey: any; sidebar?: boolean }) {
               fontSize="22px"
               fontWeight={'700'}
               mx="auto"
+              mb={5}
               textAlign={'center'}
               color={textColor}
             >
-              Enter your OpenAI API Key
+              Enter your Alibaba Cloud Api Key
             </ModalHeader>
             <ModalCloseButton _focus={{ boxShadow: 'none' }} />
             <ModalBody p="0px">
-              <Text
+              {/* <Text
                 color={grayColor}
                 fontWeight="500"
                 fontSize="md"
@@ -106,7 +107,7 @@ function APIModal(props: { setApiKey: any; sidebar?: boolean }) {
                 You need an OpenAI API Key to use Horizon AI Template's
                 features. Your API Key is stored locally on your browser and
                 never sent anywhere else.
-              </Text>
+              </Text> */}
               <Flex mb="20px">
                 <Input
                   h="100%"
@@ -160,7 +161,7 @@ function APIModal(props: { setApiKey: any; sidebar?: boolean }) {
                   Save API Key
                 </Button>
               </Flex>
-              <Link
+              {/* <Link
                 color={link}
                 fontSize="sm"
                 href="https://platform.openai.com/account/api-keys"
@@ -168,8 +169,8 @@ function APIModal(props: { setApiKey: any; sidebar?: boolean }) {
                 fontWeight="600"
               >
                 Get your API key from Open AI Dashboard
-              </Link>
-              <Accordion allowToggle w="100%" my="16px">
+              </Link> */}
+              {/* <Accordion allowToggle w="100%" my="16px">
                 <AccordionItem border="none">
                   <AccordionButton
                     borderBottom="0px solid"
@@ -232,8 +233,8 @@ function APIModal(props: { setApiKey: any; sidebar?: boolean }) {
                     </UnorderedList>
                   </AccordionPanel>
                 </AccordionItem>
-              </Accordion>
-              <Text
+              </Accordion> */}
+              {/* <Text
                 color={grayColor}
                 fontWeight="500"
                 fontSize="sm"
@@ -242,7 +243,7 @@ function APIModal(props: { setApiKey: any; sidebar?: boolean }) {
               >
                 *The app will connect to OpenAI API server to check if your API
                 Key is working properly.
-              </Text>
+              </Text> */}
             </ModalBody>
           </Card>
         </ModalContent>
