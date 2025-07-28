@@ -17,6 +17,9 @@ RUN npm run build
 # ----- Stage 2: Run -----
 FROM alibaba-cloud-linux-3-registry.cn-hangzhou.cr.aliyuncs.com/alinux3/node:20.16
 
+# Switch to root user for package installation
+USER root
+
 # Install Python 3 and pip for chatbot functionality
 RUN yum update -y && \
     yum install -y python3 python3-pip && \
