@@ -97,8 +97,8 @@ export function SidebarLinks(props: SidebarLinksProps) {
                               route.disabled
                                 ? gray
                                 : activeRoute(route.path.toLowerCase())
-                                ? activeIcon
-                                : inactiveColor
+                                  ? activeIcon
+                                  : inactiveColor
                             }
                             me="12px"
                             mt="6px"
@@ -112,8 +112,8 @@ export function SidebarLinks(props: SidebarLinksProps) {
                               route.disabled
                                 ? gray
                                 : activeRoute(route.path.toLowerCase())
-                                ? activeColor
-                                : 'gray.500'
+                                  ? activeColor
+                                  : 'gray.500'
                             }
                             fontWeight="500"
                             letterSpacing="0px"
@@ -157,8 +157,8 @@ export function SidebarLinks(props: SidebarLinksProps) {
                       route.icon && route.items
                         ? createLinks(route.items) // for bullet accordion links
                         : route.items
-                        ? createAccordionLinks(route.items)
-                        : '' // for non-bullet accordion links
+                          ? createAccordionLinks(route.items)
+                          : '' // for non-bullet accordion links
                     }
                   </List>
                 </AccordionPanel>
@@ -220,8 +220,8 @@ export function SidebarLinks(props: SidebarLinksProps) {
                             route.disabled
                               ? gray
                               : activeRoute(route.path.toLowerCase())
-                              ? activeIcon
-                              : inactiveColor
+                                ? activeIcon
+                                : inactiveColor
                           }
                           me="12px"
                           mt="6px"
@@ -234,8 +234,8 @@ export function SidebarLinks(props: SidebarLinksProps) {
                             route.disabled
                               ? gray
                               : activeRoute(route.path.toLowerCase())
-                              ? activeColor
-                              : 'gray.500'
+                                ? activeColor
+                                : 'gray.500'
                           }
                           fontWeight="500"
                           letterSpacing="0px"
@@ -258,8 +258,8 @@ export function SidebarLinks(props: SidebarLinksProps) {
                           route.disabled
                             ? gray
                             : activeRoute(route.path.toLowerCase())
-                            ? activeIcon
-                            : inactiveColor
+                              ? activeIcon
+                              : inactiveColor
                         }
                         me="12px"
                         mt="6px"
@@ -273,8 +273,8 @@ export function SidebarLinks(props: SidebarLinksProps) {
                           route.disabled
                             ? gray
                             : activeRoute(route.path.toLowerCase())
-                            ? activeColor
-                            : 'gray.500'
+                              ? activeColor
+                              : 'gray.500'
                         }
                         fontWeight="500"
                         letterSpacing="0px"
@@ -310,8 +310,8 @@ export function SidebarLinks(props: SidebarLinksProps) {
                       route.disabled
                         ? gray
                         : activeRoute(route.path.toLowerCase())
-                        ? activeColor
-                        : inactiveColor
+                          ? activeColor
+                          : inactiveColor
                     }
                     fontWeight="500"
                     fontSize="xs"
@@ -350,8 +350,8 @@ export function SidebarLinks(props: SidebarLinksProps) {
               route.disabled
                 ? gray
                 : activeRoute(route.path.toLowerCase())
-                ? activeColor
-                : inactiveColor
+                  ? activeColor
+                  : inactiveColor
             }
             fontWeight={
               activeRoute(route.path.toLowerCase()) ? 'bold' : 'normal'

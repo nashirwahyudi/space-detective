@@ -1,11 +1,6 @@
 'use client';
 // chakra imports
-import {
-  Box,
-  Flex,
-  Stack,
-  useColorModeValue,
-} from '@chakra-ui/react';
+import { Box, Flex, Stack, useColorModeValue } from '@chakra-ui/react';
 import NavLink from '@/components/link/NavLink';
 //   Custom components
 import avatar4 from '/public/img/avatars/avatar4.png';

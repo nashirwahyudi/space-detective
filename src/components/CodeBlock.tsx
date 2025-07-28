@@ -37,7 +37,7 @@ export const CodeBlock: FC<Props> = ({
         }}
       >
         {copyText}
-      </button> 
+      </button>
       <CodeMirror
         editable={editable}
         value={code}

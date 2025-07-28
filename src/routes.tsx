@@ -1,8 +1,5 @@
 import { Icon } from './lib/chakra';
-import {
-  MdHome,
-  MdAutoAwesome,
-} from 'react-icons/md';
+import { MdHome, MdAutoAwesome } from 'react-icons/md';
 
 // Auth Imports
 import { IRoute } from './types/navigation';
