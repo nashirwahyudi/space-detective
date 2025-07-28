@@ -38,7 +38,7 @@ COPY --from=builder /app/package.json ./
 COPY chatbot ./chatbot
 COPY requirements.txt ./
 RUN pip3 install --upgrade pip
-RUN pip3 install -r requirements.txt
+RUN pip3 install -r requirements.txt -i https://pypi.org/simple/
 
 # Set environment variables (optional)
 ENV NODE_ENV production
