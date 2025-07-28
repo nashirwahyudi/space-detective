@@ -11,8 +11,13 @@ export const HorizonLogo = createIcon({
     //     fill="currentColor"
     //   />
     // </g>
-    <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1674.41 206.25">
-  {/* <defs>
+    <svg
+      id="Layer_1"
+      data-name="Layer 1"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 1674.41 206.25"
+    >
+      {/* <defs>
     <style>
       .cls-1 {
         fontSize: "181px";
@@ -28,8 +33,22 @@ export const HorizonLogo = createIcon({
       }
     </style>
   </defs> */}
-  <text style={{fontSize: "181px", fontFamily:"Metropolis-Regular, Metropolis"}} className="cls-1" transform="translate(0 152.67)"><tspan className="cls-3" x="0" y="0" style={{fontWeight: 700}}>SPACE </tspan><tspan className="cls-2" x="665.53" y="0">DETECTIVE</tspan></text>
-</svg>
+      <text
+        style={{
+          fontSize: '181px',
+          fontFamily: 'Metropolis-Regular, Metropolis',
+        }}
+        className="cls-1"
+        transform="translate(0 152.67)"
+      >
+        <tspan className="cls-3" x="0" y="0" style={{ fontWeight: 700 }}>
+          SPACE{' '}
+        </tspan>
+        <tspan className="cls-2" x="665.53" y="0">
+          DETECTIVE
+        </tspan>
+      </text>
+    </svg>
   ),
 });
 

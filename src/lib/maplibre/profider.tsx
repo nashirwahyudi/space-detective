@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import React, { useEffect, useRef, useState } from "react";
-import maplibregl from "maplibre-gl";
+import React, { useEffect, useRef, useState } from 'react';
+import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
-import { MapContext } from "@/contexts/MapContext";
+import { MapContext } from '@/contexts/MapContext';
 
 type MapComponentProps = {
   mapContainerRef: React.RefObject<HTMLDivElement | null>;
@@ -32,10 +32,10 @@ export default function MapProvider({
       center: [initialViewState.longitude, initialViewState.latitude],
       zoom: initialViewState.zoom,
       attributionControl: false,
-      logoPosition: "bottom-right",
+      logoPosition: 'bottom-right',
     });
 
-    map.current.on("load", () => {
+    map.current.on('load', () => {
       setLoaded(true);
     });
 

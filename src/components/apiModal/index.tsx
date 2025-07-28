@@ -1,19 +1,10 @@
 'use client';
 import Card from '@/components/card/Card';
 import {
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
-  Box,
   Button,
   Flex,
   Icon,
   Input,
-  Link,
-  ListItem,
-  UnorderedList,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -144,16 +135,16 @@ function APIModal(props: { setApiKey: any; sidebar?: boolean }) {
                         title: inputCode?.includes('sk-')
                           ? `Success! You have successfully added your API key!`
                           : !inputCode?.includes('sk-')
-                          ? `Invalid API key. Please make sure your API key is still working properly.`
-                          : 'Please add your API key!',
+                            ? `Invalid API key. Please make sure your API key is still working properly.`
+                            : 'Please add your API key!',
                         position: 'top',
                         status: inputCode?.includes('sk-')
                           ? 'success'
                           : !inputCode?.includes('sk-')
-                          ? `error`
-                          : !inputCode
-                          ? 'warning'
-                          : 'error',
+                            ? `error`
+                            : !inputCode
+                              ? 'warning'
+                              : 'error',
                         isClosable: true,
                       });
                   }}

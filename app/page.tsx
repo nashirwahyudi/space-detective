@@ -4,22 +4,11 @@
 import { ChatBody, OpenAIModel } from '@/types/types';
 // import Map from '@/components/statistic/Map';
 import MapProvider from '@/lib/maplibre/profider';
-import {
-  Box,
-  Card,
-  Flex,
-  Table,
-  TableCaption,
-  TableContainer,
-  Tbody,
-  Td,
-  Tfoot,
-  Th,
-  Thead,
-  Tr,
-  useColorModeValue,
-} from '@chakra-ui/react';
+import { Flex, Box, useColorModeValue, Card } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
+import { useFetchAnalyticsTable } from '@/components/analytics/data';
+import Table from '@/components/statistic/Table';
+import Shap from '@/components/statistic/Shap';
 
 // export default function Chat(props: { apiKeyApp: string }) {
 export default function Dashboard() {
@@ -130,6 +119,7 @@ export default function Dashboard() {
 
     setLoading(false);
   };
+
   // -------------- Copy Response --------------
   // const copyToClipboard = (text: string) => {
   //   const el = document.createElement('textarea');
@@ -164,10 +154,16 @@ export default function Dashboard() {
         direction="row"
         mx="auto"
         w={{ base: '100%', md: '100%', xl: '100%' }}
-        minH={{ base: '75vh', '2xl': '85vh' }}
+        // minH={{ base: '75vh', '2xl': '85vh' }}
         maxW="1000px"
       >
-        <Flex direction={'row'} w="50%" h={{ base: '75vh', '2xl': '85vh' }} mb={'auto'} marginEnd={5}>
+        <Flex
+          direction={'row'}
+          w="50%"
+          h={{ base: '85vh', '2xl': '85vh' }}
+          mb={'auto'}
+          marginEnd={5}
+        >
           <Card
             display={'flex'}
             px="22px !important"
@@ -180,77 +176,57 @@ export default function Dashboard() {
             fontWeight="500"
           >
             {/* <Map/> */}
-            <Box 
+            <Box
               id="map-container"
               ref={mapContainerRef}
               w={'100%'}
               h={'100%'}
-              display='absolute'
-              inset={0}>
-              <MapProvider 
-              mapContainerRef={mapContainerRef}
-              initialViewState={{
-                longitude: -122.4194,
-                latitude: 37.7749,
-                zoom: 10,
-              }}></MapProvider>
+              display="absolute"
+              inset={0}
+            >
+              <MapProvider
+                mapContainerRef={mapContainerRef}
+                initialViewState={{
+                  longitude: -122.4194,
+                  latitude: 37.7749,
+                  zoom: 10,
+                }}
+              ></MapProvider>
             </Box>
           </Card>
         </Flex>
-        <Flex direction={'column'} h={{ base: '75vh', '2xl': '85vh' }} w="50%" mb={'auto'} gap='5'>
+        <Flex
+          direction={'column'}
+          // h={{ base: '75vh', '2xl': '85vh' }}
+          w="50%"
+          mb={'auto'}
+          gap="5"
+        >
           <Card
             display={'flex'}
             px="22px !important"
             w={'100%'}
             py="22px !important"
-            h={{base: '50%'}}
+            h={{ min: '50%' }}
             color={textColor}
             fontSize={{ base: 'sm', md: 'md' }}
             lineHeight={{ base: '24px', md: '26px' }}
             fontWeight="500"
           >
-            {/* Tabel checklist */}
-            <TableContainer>
-              <Table variant='striped' size='md'>
-                <Thead>
-                  <Tr>
-                    <Th>Highlight</Th>
-                    <Th isNumeric>2022</Th>
-                    <Th isNumeric>2023</Th>
-                  </Tr>
-                </Thead>
-                <Tbody>
-                  <Tr>
-                    <Td>Provinsi A</Td>
-                    <Td isNumeric>0.7</Td>
-                    <Td isNumeric>0.76</Td>
-                  </Tr>
-                  <Tr>
-                    <Td>Provinsi B</Td>
-                    <Td isNumeric>0.97</Td>
-                    <Td isNumeric>0.62</Td>
-                  </Tr>
-                  <Tr>
-                    <Td>Provinsi C</Td>
-                    <Td isNumeric>0.34</Td>
-                    <Td isNumeric>0.63</Td>
-                  </Tr>
-                </Tbody>
-              </Table>
-            </TableContainer>
+            <Table />
           </Card>
           <Card
             display={'flex'}
             px="22px !important"
-            py="22px !important"
-            h={{base: '50%'}}
             w={'100%'}
+            py="22px !important"
+            h={{ min: '50%' }}
             color={textColor}
             fontSize={{ base: 'sm', md: 'md' }}
             lineHeight={{ base: '24px', md: '26px' }}
             fontWeight="500"
           >
-            Shap value
+            <Shap />
           </Card>
         </Flex>
       </Flex>
