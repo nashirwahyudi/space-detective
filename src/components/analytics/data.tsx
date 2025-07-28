@@ -4,8 +4,7 @@ export const useFetchAnalyticsTable = async (params: URLSearchParams) => {
     headers: {
       'Content-Type': 'application/json',
     },
-  })
-    .then(async (res) => await res.json())
+  }).then(async (res) => await res.json());
 };
 
 export const useFetchMasterWilayah = async (params: URLSearchParams) => {
@@ -14,6 +13,14 @@ export const useFetchMasterWilayah = async (params: URLSearchParams) => {
     headers: {
       'Content-Type': 'application/json',
     },
-  })
-    .then(async (res) => await res.json())
-}
+  }).then(async (res) => await res.json());
+};
+
+export const useFecthShap = async () => {
+  return await fetch('./api/shap', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).then(async (res) => await res.json());
+};

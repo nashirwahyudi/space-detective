@@ -4,15 +4,11 @@
 import { ChatBody, OpenAIModel } from '@/types/types';
 // import Map from '@/components/statistic/Map';
 import MapProvider from '@/lib/maplibre/profider';
-import {
-  Flex,
-  Box,
-  useColorModeValue,
-  Card
-} from '@chakra-ui/react';
+import { Flex, Box, useColorModeValue, Card } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
 import { useFetchAnalyticsTable } from '@/components/analytics/data';
-import Table from '@/components/statistic/Table'
+import Table from '@/components/statistic/Table';
+import Shap from '@/components/statistic/Shap';
 
 // export default function Chat(props: { apiKeyApp: string }) {
 export default function Dashboard() {
@@ -143,14 +139,6 @@ export default function Dashboard() {
   // }
   // }, [])
 
-  useEffect(() => {
-    useFetchAnalyticsTable().then(data => {
-      console.log("data: ", data);
-    }).catch(err => {
-      console.log("error: ", err)
-    })
-  }, [])
-
   const handleChange = (Event: any) => {
     setInputCode(Event.target.value);
   };
@@ -166,13 +154,13 @@ export default function Dashboard() {
         direction="row"
         mx="auto"
         w={{ base: '100%', md: '100%', xl: '100%' }}
-        minH={{ base: '75vh', '2xl': '85vh' }}
+        // minH={{ base: '75vh', '2xl': '85vh' }}
         maxW="1000px"
       >
         <Flex
           direction={'row'}
           w="50%"
-          h={{ base: '75vh', '2xl': '85vh' }}
+          h={{ base: '85vh', '2xl': '85vh' }}
           mb={'auto'}
           marginEnd={5}
         >
@@ -209,7 +197,7 @@ export default function Dashboard() {
         </Flex>
         <Flex
           direction={'column'}
-          h={{ base: '75vh', '2xl': '85vh' }}
+          // h={{ base: '75vh', '2xl': '85vh' }}
           w="50%"
           mb={'auto'}
           gap="5"
@@ -230,15 +218,15 @@ export default function Dashboard() {
           <Card
             display={'flex'}
             px="22px !important"
-            py="22px !important"
-            h={{ base: '50%' }}
             w={'100%'}
+            py="22px !important"
+            h={{ min: '50%' }}
             color={textColor}
             fontSize={{ base: 'sm', md: 'md' }}
             lineHeight={{ base: '24px', md: '26px' }}
             fontWeight="500"
           >
-            Shap value
+            <Shap />
           </Card>
         </Flex>
       </Flex>

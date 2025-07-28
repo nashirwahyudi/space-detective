@@ -13,13 +13,13 @@ export async function GET(req: Request) {
     let params: any[] = [];
     let idx = 1;
 
-    let cols:string = [];
+    let cols: string = [];
     if (level == 'kab') {
-        cols = 'idkab, nmkab';
+      cols = 'idkab, nmkab';
     } else if (level == 'kec') {
-        cols = 'idkec, nmkec';
+      cols = 'idkec, nmkec';
     } else if (level == 'des') {
-        cols = 'iddesa, nmdesa';
+      cols = 'iddesa, nmdesa';
     }
     let query = `SELECT distinct ${cols} FROM table_h3_anomaly_score WHERE 1=1`;
 
