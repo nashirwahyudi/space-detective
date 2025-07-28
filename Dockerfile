@@ -22,7 +22,7 @@ USER root
 
 # Install Python 3 and pip for chatbot functionality
 RUN yum update -y && \
-    yum install -y python3 python3-pip && \
+    yum install -y python3 python3-pip python3-devel gcc postgresql-devel && \
     yum clean all
 
 # Set working directory
