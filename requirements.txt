@@ -12,7 +12,7 @@ sqlalchemy[asyncio]>=1.4.0
 
 # Vector database and embeddings
 sentence-transformers>=2.0.0
-transformers>=4.20.0
+transformers>=4.0.0,<4.19.0
 
 # Machine Learning
 scikit-learn>=1.0.0
