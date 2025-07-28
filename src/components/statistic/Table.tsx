@@ -21,7 +21,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import {useFetchAnalyticsTable} from '@/components/analytics/table'
+import {useFetchAnalyticsTable, useFetchMasterWilayah} from '@/components/analytics/data'
 
 export default function AnomalyTable() {
 
@@ -34,7 +34,12 @@ export default function AnomalyTable() {
   const [kecFilter, setKecFilter] = useState('');
   const [desFilter, setDesFilter] = useState('');
 
-    const fetchRows = async () => {
+//   options
+  const [kabOptions, setKabOptions] = useState([]);
+  const [kecOptions, setKecOptions] = useState([]);
+  const [desOptions, setDesOptions] = useState([]);
+
+const fetchRows = async () => {
     setLoading(true);
     const params = new URLSearchParams({
       page: String(page),
@@ -58,11 +63,36 @@ export default function AnomalyTable() {
     }
     setLoading(false);
   };
+
+  const fetchMasterWilayah = async (level:string) => {
+    let params = new URLSearchParams({
+        level: level
+    })
+    try {
+        let response = await useFetchMasterWilayah(params);
+        if (response.success) {
+            if (level == 'kab') {
+                setKabOptions(response.data);
+            } else if (level == 'kec') {
+                setKecOptions(response.data);
+            } else if (level == 'des') {
+                setDesOptions(response.data);
+            }
+        } else {
+            throw Error(response.message);
+        }
+    } catch(err: any) {
+        console.log(err)
+    }
+  }
+
   useEffect(()=> {
+    fetchMasterWilayah('kab');
+    fetchMasterWilayah('kec');
+    fetchMasterWilayah('des');
     fetchRows();
   }, [page])
-
-
+  
   const handleFilter = (e: React.FormEvent) => {
     e.preventDefault();
     setPage(1);
@@ -73,20 +103,20 @@ export default function AnomalyTable() {
     <Box p={0}>
       <form onSubmit={handleFilter}>
         <Flex gap="2" mb="4" wrap="wrap" direction="row">
-                <Select placeholder="Pilih Kabupaten" value={kabFilter} onChange={(e) => setKabFilter(e.target.value)} size='sm' w={'32%'}>
-                    <option value="kab">Kabupaten</option>
-                    <option value="kec">Kecamatan</option>
-                    <option value="desa">Desa</option>
+                <Select placeholder="Pilih Kabupaten" value={kabFilter} onChange={(e) => setKabFilter(e.target.value)} size='sm' w={'32%'} disabled={kabOptions.length == 0}>
+                    {kabOptions.map((elem: any) => (
+                        <option value={elem.idkab}>{elem.nmkab}</option>
+                    ))}
                 </Select>
-                <Select placeholder="Pilih Kecamatan" value={kabFilter} onChange={(e) => setKabFilter(e.target.value)} size='sm' w={'32%'}>
-                    <option value="kab">Kabupaten</option>
-                    <option value="kec">Kecamatan</option>
-                    <option value="desa">Desa</option>
+                <Select placeholder="Pilih Kecamatan" value={kabFilter} onChange={(e) => setKecFilter(e.target.value)} size='sm' w={'32%'} disabled={kecOptions.length == 0}>
+                    {kecOptions.map((elem: any) => (
+                        <option value={elem.idkec}>{elem.nmkec}</option>
+                    ))}
                 </Select>
-                <Select placeholder="Pilih Desa" value={kabFilter} onChange={(e) => setKabFilter(e.target.value)} size='sm' w={'32%'}>
-                    <option value="kab">Kabupaten</option>
-                    <option value="kec">Kecamatan</option>
-                    <option value="desa">Desa</option>
+                <Select placeholder="Pilih Desa" value={kabFilter} onChange={(e) => setDesFilter(e.target.value)} size='sm' w={'32%'} disabled={desOptions.length == 0}>
+                    {desOptions.map((elem: any) => (
+                        <option value={elem.iddesa}>{elem.nmdesa}</option>
+                    ))}
                 </Select>
         </Flex>
           <Button type="submit" colorScheme="blue" size='sm'>Apply Filters</Button>

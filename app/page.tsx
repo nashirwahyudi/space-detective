@@ -11,7 +11,7 @@ import {
   Card
 } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
-import { useFetchAnalyticsTable } from '@/components/analytics/table';
+import { useFetchAnalyticsTable } from '@/components/analytics/data';
 import Table from '@/components/statistic/Table'
 
 // export default function Chat(props: { apiKeyApp: string }) {

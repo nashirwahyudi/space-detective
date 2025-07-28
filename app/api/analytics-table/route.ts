@@ -18,16 +18,16 @@ export async function GET(req: Request) {
     let query = `SELECT * FROM table_h3_anomaly_score WHERE 1=1`;
     let idx = 1;
     if (kabupaten) {
-      query += ` AND nmkab ILIKE $${idx++}`;
-      params.push(`%${kabupaten}%`);
+      query += ` AND idkab = $${idx++}`;
+      params.push(kabupaten);
     }
     if (kecamatan) {
-      query += ` AND nmkec ILIKE $${idx++}`;
-      params.push(`%${kecamatan}%`);
+      query += ` AND idkec = $${idx++}`;
+      params.push(kecamatan);
     }
     if (desa) {
-      query += ` AND nmdes ILIKE $${idx++}`;
-      params.push(`%${desa}%`);
+      query += ` AND iddes = $${idx++}`;
+      params.push(desa);
     }
 
     query += ` ORDER BY anomaly_flag DESC LIMIT $${idx++} OFFSET $${idx++}`;
@@ -40,16 +40,16 @@ export async function GET(req: Request) {
     let cIdx = 1;
 
     if (kabupaten) {
-      countQuery += ` AND nmkab ILIKE $${cIdx++}`;
-      countParams.push(`%${kabupaten}%`);
+      countQuery += ` AND idkab = $${cIdx++}`;
+      countParams.push(kabupaten);
     }
     if (kecamatan) {
-      countQuery += ` AND nmkec ILIKE $${cIdx++}`;
-      countParams.push(`%${kecamatan}%`);
+      countQuery += ` AND idkec = $${cIdx++}`;
+      countParams.push(kecamatan);
     }
     if (desa) {
-      countQuery += ` AND nmdes ILIKE $${cIdx++}`;
-      countParams.push(`%${desa}%`);
+      countQuery += ` AND iddes = $${cIdx++}`;
+      countParams.push(desa);
     }
 
     const totalResult = await pool.query(countQuery, countParams);
