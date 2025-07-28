@@ -1,7 +1,7 @@
 # Space Detective v2.0 Requirements
 
 # FastAPI and web framework
-fastapi==0.104.1
+fastapi==0.83.0
 uvicorn[standard]==0.24.0
 python-multipart==0.0.6
 
