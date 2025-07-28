@@ -43,5 +43,19 @@ ENV PORT 3000
 # Expose port
 EXPOSE 3000
 
-# Start the app
-CMD ["npm", "start"]
+# Create startup script
+COPY <<EOF /app/start.sh
+#!/bin/bash
+# Start chatbot API in background
+cd /app/chatbot/endpoint && python3 standalone_api.py --host 0.0.0.0 --port 8000 &
+# Start Next.js app
+cd /app && npm start
+EOF
+
+RUN chmod +x /app/start.sh
+
+# Expose chatbot port
+EXPOSE 8000
+
+# Start both services
+CMD ["/app/start.sh"]
