@@ -37,4 +37,4 @@ ENV PORT 3000
 EXPOSE 3000
 
 # Start both services
-CMD ["/app/start.sh"]
+CMD ["npm", "start"]
