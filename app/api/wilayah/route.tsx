@@ -13,7 +13,7 @@ export async function GET(req: Request) {
     let params: any[] = [];
     let idx = 1;
 
-    let cols: string = [];
+    let cols: string = '';
     if (level == 'kab') {
       cols = 'idkab, nmkab';
     } else if (level == 'kec') {

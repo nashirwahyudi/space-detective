@@ -10,11 +10,7 @@ import {
   Center,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import {
-  useFecthShap,
-  useFetchAnalyticsTable,
-  useFetchMasterWilayah,
-} from '@/components/analytics/data';
+import { useFecthShap } from '@/components/analytics/data';
 
 export default function AnomalyTable() {
   const [rows, setRows] = useState([]);
@@ -53,17 +49,17 @@ export default function AnomalyTable() {
       <Flex gap="2" mb="4" wrap="wrap" direction="row">
         <Select
           placeholder="Pilih Index H3"
-          value={shapFilter}
+          // value={shapFilter}
           onChange={(e) => setShapFilter(e.target.value)}
           size="sm"
           w={'100%'}
           disabled={shapOptions.length == 0}
+          defaultValue={shapFilter}
         >
           {shapOptions.map((elem: any, index) => (
             <option
               value={elem.png_relative_path}
               key={`${elem.h3_index}_${index}`}
-              selected={index == 0}
             >
               {elem.h3_index}
             </option>
