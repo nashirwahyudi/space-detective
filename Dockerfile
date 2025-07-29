@@ -15,27 +15,16 @@ COPY . .
 RUN npm run build
 
 # ----- Stage 2: Run -----
-FROM alibaba-cloud-linux-3-registry.cn-hangzhou.cr.aliyuncs.com/alinux3/node:20.16
+FROM python:3.11-slim
 
-# Switch to root user for package installation
-USER root
-
-# Install Python 3.11+ using deadsnakes PPA equivalent for AL3
-RUN yum update -y && \
-    yum install -y gcc postgresql-devel wget openssl-devel libffi-devel zlib-devel make tar gzip && \
-    yum clean all
-
-# Install Python 3.11 from source
-RUN cd /tmp && \
-    wget https://www.python.org/ftp/python/3.11.8/Python-3.11.8.tgz && \
-    tar xzf Python-3.11.8.tgz && \
-    cd Python-3.11.8 && \
-    ./configure --enable-optimizations --with-ensurepip=install && \
-    make altinstall && \
-    ln -sf /usr/local/bin/python3.11 /usr/local/bin/python3 && \
-    ln -sf /usr/local/bin/pip3.11 /usr/local/bin/pip3 && \
-    cd / && rm -rf /tmp/Python-3.11.8* && \
-    python3 --version
+# Install Node.js 20.16
+RUN apt-get update && \
+    apt-get install -y curl && \
+    curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs && \
+    apt-get install -y postgresql-client libpq-dev gcc && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Set working directory
 WORKDIR /app
