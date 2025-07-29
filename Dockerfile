@@ -22,7 +22,7 @@ USER root
 
 # Install Python 3.11+ using deadsnakes PPA equivalent for AL3
 RUN yum update -y && \
-    yum install -y gcc postgresql-devel wget openssl-devel libffi-devel zlib-devel make && \
+    yum install -y gcc postgresql-devel wget openssl-devel libffi-devel zlib-devel make tar gzip && \
     yum clean all
 
 # Install Python 3.11 from source
