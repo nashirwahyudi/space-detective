@@ -24,3 +24,12 @@ export const useFecthShap = async () => {
     },
   }).then(async (res) => await res.json());
 };
+
+export const useFetchGeoJsonLayer = async (params: URLSearchParams) => {
+  return await fetch(`./api/mapservice?${params.toString()}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).then(async (res) => await res.json());
+};

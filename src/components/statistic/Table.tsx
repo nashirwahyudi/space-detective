@@ -167,7 +167,7 @@ export default function AnomalyTable() {
             </Thead>
             <Tbody>
               {rows.map((r: any, index) => (
-                <Tr key={r.id_desa}>
+                <Tr key={`table_data_${index}`}>
                   <Td>{r.anomaly_label}</Td>
                   <Td isNumeric>
                     {parseFloat(r.anomaly_score_probability.toFixed(2))}

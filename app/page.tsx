@@ -3,12 +3,12 @@
 
 import { ChatBody, OpenAIModel } from '@/types/types';
 // import Map from '@/components/statistic/Map';
-import MapProvider from '@/lib/maplibre/profider';
+import MapProvider from '@/lib/maplibre/provider';
 import { Flex, Box, useColorModeValue, Card } from '@chakra-ui/react';
-import { useEffect, useRef, useState } from 'react';
-import { useFetchAnalyticsTable } from '@/components/analytics/data';
+import { useRef, useState } from 'react';
 import Table from '@/components/statistic/Table';
 import Shap from '@/components/statistic/Shap';
+import H3Layer from '@/components/statistic/H3Layer';
 
 // export default function Chat(props: { apiKeyApp: string }) {
 export default function Dashboard() {
@@ -187,11 +187,17 @@ export default function Dashboard() {
               <MapProvider
                 mapContainerRef={mapContainerRef}
                 initialViewState={{
-                  longitude: -122.4194,
-                  latitude: 37.7749,
-                  zoom: 10,
+                  longitude: 98.845901,
+                  latitude: 2.916044,
+                  zoom: 7,
                 }}
-              ></MapProvider>
+              >
+                <H3Layer
+                  {...{ h3_index: '', iddesa: '', idkec: '', idkab: '' }}
+                >
+                  {' '}
+                </H3Layer>
+              </MapProvider>
             </Box>
           </Card>
         </Flex>
