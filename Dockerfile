@@ -20,10 +20,21 @@ FROM alibaba-cloud-linux-3-registry.cn-hangzhou.cr.aliyuncs.com/alinux3/node:20.
 # Switch to root user for package installation
 USER root
 
-# Install Python 3.9+ and pip for chatbot functionality
+# Install Python 3.11+ using deadsnakes PPA equivalent for AL3
 RUN yum update -y && \
-    yum install -y python3 python3-pip python3-devel gcc postgresql-devel && \
-    yum clean all && \
+    yum install -y gcc postgresql-devel wget openssl-devel libffi-devel zlib-devel make && \
+    yum clean all
+
+# Install Python 3.11 from source
+RUN cd /tmp && \
+    wget https://www.python.org/ftp/python/3.11.8/Python-3.11.8.tgz && \
+    tar xzf Python-3.11.8.tgz && \
+    cd Python-3.11.8 && \
+    ./configure --enable-optimizations --with-ensurepip=install && \
+    make altinstall && \
+    ln -sf /usr/local/bin/python3.11 /usr/local/bin/python3 && \
+    ln -sf /usr/local/bin/pip3.11 /usr/local/bin/pip3 && \
+    cd / && rm -rf /tmp/Python-3.11.8* && \
     python3 --version
 
 # Set working directory
