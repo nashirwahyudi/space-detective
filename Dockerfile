@@ -105,7 +105,8 @@ EOF
 
 RUN python3 /tmp/test_packages.py
 
-RUN pip3 install -r requirements.txt -i https://pypi.org/simple/
+RUN pip3 install --upgrade pip && \
+    pip3 install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple/ --trusted-host pypi.tuna.tsinghua.edu.cn --timeout 300 --retries 5
 
 # Set environment variables (optional)
 ENV NODE_ENV production
