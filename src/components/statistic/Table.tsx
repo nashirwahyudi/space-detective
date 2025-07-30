@@ -14,7 +14,6 @@ import {
   Th,
   Thead,
   Tr,
-  useColorModeValue,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import {
@@ -22,29 +21,24 @@ import {
   useFetchMasterWilayah,
 } from '@/components/analytics/data';
 
-export default function AnomalyTable() {
+export default function AnomalyTable(props: {
+  iddesa: string;
+  idkec: string;
+  idkab: string;
+}) {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  // Filters
-  const [kabFilter, setKabFilter] = useState('');
-  const [kecFilter, setKecFilter] = useState('');
-  const [desFilter, setDesFilter] = useState('');
-
-  //   options
-  const [kabOptions, setKabOptions] = useState([]);
-  const [kecOptions, setKecOptions] = useState([]);
-  const [desOptions, setDesOptions] = useState([]);
 
   const fetchRows = async () => {
     setLoading(true);
     const params = new URLSearchParams({
       page: String(page),
       limit: '5',
-      kabupaten: kabFilter,
-      kecamatan: kecFilter,
-      desa: desFilter,
+      kabupaten: props.idkab,
+      kecamatan: props.idkec,
+      desa: props.iddesa,
     });
     try {
       let response = await useFetchAnalyticsTable(params);
@@ -62,34 +56,9 @@ export default function AnomalyTable() {
     setLoading(false);
   };
 
-  const fetchMasterWilayah = async (level: string) => {
-    let params = new URLSearchParams({
-      level: level,
-    });
-    try {
-      let response = await useFetchMasterWilayah(params);
-      if (response.success) {
-        if (level == 'kab') {
-          setKabOptions(response.data);
-        } else if (level == 'kec') {
-          setKecOptions(response.data);
-        } else if (level == 'des') {
-          setDesOptions(response.data);
-        }
-      } else {
-        throw Error(response.message);
-      }
-    } catch (err: any) {
-      console.log(err);
-    }
-  };
-
   useEffect(() => {
-    fetchMasterWilayah('kab');
-    fetchMasterWilayah('kec');
-    fetchMasterWilayah('des');
     fetchRows();
-  }, [page]);
+  }, [page, props]);
 
   const handleFilter = (e: React.FormEvent) => {
     e.preventDefault();
@@ -99,58 +68,8 @@ export default function AnomalyTable() {
 
   return (
     <Box p={0}>
-      <form onSubmit={handleFilter}>
-        <Flex gap="2" mb="4" wrap="wrap" direction="row">
-          <Select
-            placeholder="Pilih Kabupaten"
-            value={kabFilter}
-            onChange={(e) => setKabFilter(e.target.value)}
-            size="sm"
-            w={'32%'}
-            disabled={kabOptions.length == 0}
-          >
-            {kabOptions.map((elem: any) => (
-              <option value={elem.idkab} key={elem.idkab}>
-                {elem.nmkab}
-              </option>
-            ))}
-          </Select>
-          <Select
-            placeholder="Pilih Kecamatan"
-            value={kabFilter}
-            onChange={(e) => setKecFilter(e.target.value)}
-            size="sm"
-            w={'32%'}
-            disabled={kecOptions.length == 0}
-          >
-            {kecOptions.map((elem: any) => (
-              <option value={elem.idkec} key={elem.idkec}>
-                {elem.nmkec}
-              </option>
-            ))}
-          </Select>
-          <Select
-            placeholder="Pilih Desa"
-            value={kabFilter}
-            onChange={(e) => setDesFilter(e.target.value)}
-            size="sm"
-            w={'32%'}
-            disabled={desOptions.length == 0}
-          >
-            {desOptions.map((elem: any) => (
-              <option value={elem.iddesa} key={elem.iddesa}>
-                {elem.nmdesa}
-              </option>
-            ))}
-          </Select>
-        </Flex>
-        <Button type="submit" colorScheme="blue" size="sm">
-          Apply Filters
-        </Button>
-      </form>
-
       {loading ? (
-        <Center w={'100%'}>
+        <Center w={'100%'} h={'50%  '}>
           <Spinner />
         </Center>
       ) : (

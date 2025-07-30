@@ -39,18 +39,25 @@ export default function MapProvider({
       setLoaded(true);
     });
 
-    return () => {
-      if (map.current) {
-        map.current.remove();
-        map.current = null;
-      }
-    };
-  }, [initialViewState, mapContainerRef]);
+    // return () => {
+    //   if (map.current) {
+    //     map.current.remove();
+    //     map.current = null;
+    //   }
+    // };
+  }, []);
+
+  useEffect(() => {
+  if (map.current) {
+    (window as any).map = map.current;
+  }
+}, [loaded]);
 
   return (
     <div className="z-[1000]">
-      <MapContext.Provider value={{ map: map.current! }}>
-        {children}
+      <MapContext.Provider value={map.current ? { map: map.current, loaded: loaded }: null}>
+        {map.current && loaded ? children: null}
+        {/* {children} */}
       </MapContext.Provider>
       {!loaded && (
         <div className="absolute inset-0 flex items-center justify-center bg-background/80 z-[1000]">

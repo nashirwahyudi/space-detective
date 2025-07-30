@@ -9,17 +9,9 @@ export default function H3Layer(props: {
   idkec: any;
   idkab: any;
 }) {
-  const { map } = useMap();
+  const { map, loaded } = useMap();
 
-  useEffect(() => {
-    if (!map) return;
-
-    const sourceId = 'pg-geojson';
-    const layerId = 'pg-layer';
-    const bordersourceId = 'pg-geojson-1';
-    const borderlayerId = 'pg-layer-1';
-
-    const loadGeoJSON = async () => {
+  const loadGeoJSON = async () => {
       let params = new URLSearchParams({
         h3_index: props.h3_index,
         iddesa: props.iddesa,
@@ -28,13 +20,17 @@ export default function H3Layer(props: {
       });
       const res = await useFetchGeoJsonLayer(params);
 
-      // Remove old layer/source
-      if (map && map.getLayer(layerId)) map.removeLayer(layerId);
-      if (map && map.getSource(sourceId)) map.removeSource(sourceId);
-      if (map && map.getLayer(borderlayerId)) map.removeLayer(borderlayerId);
-      if (map && map.getSource(bordersourceId)) map.removeSource(bordersourceId);
+      const sourceId = 'pg-geojson';
+      const layerId = 'pg-layer';
+      const borderlayerId = 'pg-layer-1';
 
-      map.addSource(sourceId, {
+        // Remove old layer/source
+        if (map && map.getLayer(layerId)) map.removeLayer(layerId);
+        if (map && map.getLayer(borderlayerId)) map.removeLayer(borderlayerId);
+        if (map && map.getSource(sourceId)) map.removeSource(sourceId);
+        // if (map && map.getSource(bordersourceId)) map.removeSource(bordersourceId);
+
+        map.addSource(sourceId, {
         type: 'geojson',
         data: res.data,
       });
@@ -43,24 +39,59 @@ export default function H3Layer(props: {
         type: 'fill',
         source: sourceId,
         paint: {
-          'fill-color': '#F97316',
           'fill-opacity': 0.6,
+          'fill-color': [
+            'interpolate',
+            ['linear'],
+            ['get', 'anomaly_score_probability'],
+            0.0,
+            '#16A34A', // green
+            0.2,
+            '#84CC16', // lime green
+            0.4,
+            '#FACC15', // yellow
+            0.6,
+            '#FB923C', // orange
+            0.8,
+            '#DC2626', // red
+          ],
         },
       });
 
       map.addLayer({
         id: borderlayerId,
         type: 'line',
-        source: bordersourceId,
+        source: sourceId,
         paint: {
-          'line-color': '#EF4444',
-          'line-width': 1,
+          'line-color': [
+            'interpolate',
+            ['linear'],
+            ['get', 'anomaly_score_probability'],
+            0.0,
+            '#16A34A', // green
+            0.2,
+            '#84CC16', // lime green
+            0.4,
+            '#FACC15', // yellow
+            0.6,
+            '#FB923C', // orange
+            0.8,
+            '#DC2626', // red
+          ],
+          'line-width': 0.5,
         },
       });
-    };
+  }
 
-    loadGeoJSON();
-  }, [map, props]);
+  useEffect(() => {
+    if (!map || !loaded) return;
+
+  if (map.isStyleLoaded()) {
+    loadGeoJSON(); // 🔄 already loaded
+  } else {
+    map.once('style.load', loadGeoJSON); // ✅ wait
+  }
+  }, [map, props, loaded]);
 
   return null;
 }

@@ -26,7 +26,7 @@ export async function GET(req: Request) {
       params.push(kecamatan);
     }
     if (desa) {
-      query += ` AND iddes = $${idx++}`;
+      query += ` AND iddesa = $${idx++}`;
       params.push(desa);
     }
 
@@ -48,7 +48,7 @@ export async function GET(req: Request) {
       countParams.push(kecamatan);
     }
     if (desa) {
-      countQuery += ` AND iddes = $${cIdx++}`;
+      countQuery += ` AND iddesa = $${cIdx++}`;
       countParams.push(desa);
     }
 

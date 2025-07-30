@@ -3,6 +3,7 @@ import { createContext, useContext } from 'react';
 
 interface MapContextType {
   map: maplibregl.Map;
+  loaded: boolean;
 }
 
 export const MapContext = createContext<MapContextType | null>(null);

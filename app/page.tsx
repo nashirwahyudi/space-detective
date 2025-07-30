@@ -5,10 +5,12 @@ import { ChatBody, OpenAIModel } from '@/types/types';
 // import Map from '@/components/statistic/Map';
 import MapProvider from '@/lib/maplibre/provider';
 import { Flex, Box, useColorModeValue, Card } from '@chakra-ui/react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Table from '@/components/statistic/Table';
 import Shap from '@/components/statistic/Shap';
 import H3Layer from '@/components/statistic/H3Layer';
+import { MapLegend } from '@/components/statistic/MapLegend';
+import GlobalFilter from '@/components/statistic/GlobalFilter';
 
 // export default function Chat(props: { apiKeyApp: string }) {
 export default function Dashboard() {
@@ -143,6 +145,9 @@ export default function Dashboard() {
     setInputCode(Event.target.value);
   };
 
+  // global filter
+  const [filter, setFilter] = useState({ iddesa: '', idkec: '', idkab: '' });
+
   return (
     <Flex
       w="100%"
@@ -150,6 +155,36 @@ export default function Dashboard() {
       direction="column"
       position="relative"
     >
+      <Flex
+        direction="row"
+        mx="auto"
+        w={{ base: '100%', md: '100%', xl: '100%' }}
+        maxW="1000px"
+        mb={5}
+      >
+        <Flex direction={'row'} w="100%" h={{ minH: '5vh' }} mb={'auto'}>
+          <Card
+            display={'flex'}
+            px="22px !important"
+            py="22px !important"
+            w={'100%'}
+            color={textColor}
+            fontSize={{ base: 'sm', md: 'md' }}
+            lineHeight={{ base: '24px', md: '26px' }}
+            fontWeight="500"
+          >
+            <GlobalFilter
+              onFilterSubmit={(
+                iddesa: string,
+                idkec: string,
+                idkab: string,
+              ) => {
+                setFilter({ iddesa: iddesa, idkec: idkec, idkab: idkab });
+              }}
+            />
+          </Card>
+        </Flex>
+      </Flex>
       <Flex
         direction="row"
         mx="auto"
@@ -193,10 +228,9 @@ export default function Dashboard() {
                 }}
               >
                 <H3Layer
-                  {...{ h3_index: '', iddesa: '', idkec: '', idkab: '' }}
-                >
-                  {' '}
-                </H3Layer>
+                  {...{ h3_index: '', ...filter}}
+                />
+                <MapLegend />
               </MapProvider>
             </Box>
           </Card>
@@ -219,7 +253,7 @@ export default function Dashboard() {
             lineHeight={{ base: '24px', md: '26px' }}
             fontWeight="500"
           >
-            <Table />
+            <Table {...filter} />
           </Card>
           <Card
             display={'flex'}
