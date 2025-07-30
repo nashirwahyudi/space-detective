@@ -11,12 +11,12 @@ export default function H3Layer(props: {
   iddesa: any;
   idkec: any;
   idkab: any;
+  onH3Click: (h3_index: string) => void
 }) {
   const { map, loaded } = useMap();
-  
-  const hoveredId = useRef<number | string | undefined | null>(null);
-const clickedId = useRef<number | string | undefined | null>(null);
 
+  const hoveredId = useRef<number | string | undefined | null>(null);
+  const clickedId = useRef<number | string | undefined | null>(null);
 
   const loadGeoJSON = async () => {
     let params = new URLSearchParams({
@@ -111,9 +111,13 @@ const clickedId = useRef<number | string | undefined | null>(null);
         layers: [layerId],
       });
       const feature = features[0] as MapGeoJSONFeature;
+      
       const id = feature.id as number;
       if (clickedId !== null && clickedId.current !== id) {
-        map.setFeatureState({ source: sourceId, id: clickedId.current! }, { clicked: false });
+        map.setFeatureState(
+          { source: sourceId, id: clickedId.current! },
+          { clicked: false },
+        );
       }
       map.setFeatureState({ source: sourceId, id }, { clicked: true });
       clickedId.current = id;
@@ -123,9 +127,11 @@ const clickedId = useRef<number | string | undefined | null>(null);
         .setHTML(
           `<strong>Kode:</strong> ${id}<br/><strong>Score:</strong> ${feature.properties.anomaly_score_probability}`,
         )
-        .addTo(map).on('close', () => {
-      map.setFeatureState({ source: sourceId, id }, { clicked: false });
+        .addTo(map)
+        .on('close', () => {
+          map.setFeatureState({ source: sourceId, id }, { clicked: false });
         });
+      props.onH3Click(feature.properties.h3_index);
     });
   };
 

@@ -1,20 +1,6 @@
 `use-client`;
 
-import {
-  Box,
-  Button,
-  Center,
-  Flex,
-  Select,
-  Spinner,
-  Table,
-  TableContainer,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-} from '@chakra-ui/react';
+import { Button, Flex, Select } from '@chakra-ui/react';
 
 import { useEffect, useState } from 'react';
 import {
@@ -75,34 +61,11 @@ export default function GlobalFilter(props: {
     }
   };
 
-  const fetchShaps = async (
-    idkab: string | '',
-    idkec: string | '',
-    iddesa: string | '',
-  ) => {
-    let params = new URLSearchParams({
-      idkab: idkab,
-      idkec: idkec,
-      iddesa: iddesa,
-    });
-    try {
-      let response = await useFecthShap(params);
-      if (response.success) {
-        setS3IndexOptions(response.data);
-        setH3IndexFilter(response.data[0].png_relative_path);
-      } else {
-        throw Error(response.message);
-      }
-    } catch (err: any) {
-      console.log(err);
-    }
-  };
-
   useEffect(() => {
     fetchMasterWilayah('kab', '', '', '');
     fetchMasterWilayah('kec', kabFilter, '', '');
     fetchMasterWilayah('des', kabFilter, kecFilter, '');
-    fetchMasterWilayah('des', kabFilter, kecFilter, desFilter);
+    fetchMasterWilayah('h3', kabFilter, kecFilter, desFilter);
   }, []);
 
   useEffect(() => {

@@ -40,6 +40,11 @@ export async function GET(req: Request) {
       query += ` AND iddesa = $${idx++}`;
       params.push(`${iddesa}`);
     }
+
+    if (level == 'h3') {
+    query += ' ORDER BY anomaly_score_probability DESC'
+
+    }
     const { rows } = await pool.query(query, params);
 
     // Count total

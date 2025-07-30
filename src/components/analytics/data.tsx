@@ -17,7 +17,7 @@ export const useFetchMasterWilayah = async (params: URLSearchParams) => {
 };
 
 export const useFecthShap = async (params: URLSearchParams) => {
-  return await fetch('./api/shap', {
+  return await fetch(`./api/shap?${params.toString()}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
