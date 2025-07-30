@@ -10,6 +10,7 @@ export async function GET(req: Request) {
     const level = searchParams.get('level') || '';
     const idkab = searchParams.get('idkab') || '';
     const idkec = searchParams.get('idkec') || '';
+    const iddesa = searchParams.get('iddesa') || '';
     let params: any[] = [];
     let idx = 1;
 
@@ -20,19 +21,25 @@ export async function GET(req: Request) {
       cols = 'idkec, nmkec';
     } else if (level == 'des') {
       cols = 'iddesa, nmdesa';
+    } else if (level == 'h3') {
+      cols = 'iddesa, h3_index, anomaly_score_probability';
     }
     let query = `SELECT distinct ${cols} FROM table_h3_anomaly_score WHERE 1=1`;
 
     if (idkab) {
       query += ` AND idkab = $${idx++}`;
-      params.push(`%${idkab}%`);
+      params.push(`${idkab}`);
     }
 
     if (idkec) {
       query += ` AND idkec = $${idx++}`;
-      params.push(`%${idkec}%`);
+      params.push(`${idkec}`);
     }
 
+    if (iddesa) {
+      query += ` AND iddesa = $${idx++}`;
+      params.push(`${iddesa}`);
+    }
     const { rows } = await pool.query(query, params);
 
     // Count total

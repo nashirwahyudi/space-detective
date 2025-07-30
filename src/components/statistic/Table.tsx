@@ -22,6 +22,7 @@ import {
 } from '@/components/analytics/data';
 
 export default function AnomalyTable(props: {
+  h3_index: string;
   iddesa: string;
   idkec: string;
   idkab: string;
@@ -39,6 +40,7 @@ export default function AnomalyTable(props: {
       kabupaten: props.idkab,
       kecamatan: props.idkec,
       desa: props.iddesa,
+      h3_index: props.h3_index,
     });
     try {
       let response = await useFetchAnalyticsTable(params);

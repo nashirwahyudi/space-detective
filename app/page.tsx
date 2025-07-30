@@ -146,7 +146,12 @@ export default function Dashboard() {
   };
 
   // global filter
-  const [filter, setFilter] = useState({ iddesa: '', idkec: '', idkab: '' });
+  const [filter, setFilter] = useState({
+    h3_index: '',
+    iddesa: '',
+    idkec: '',
+    idkab: '',
+  });
 
   return (
     <Flex
@@ -175,11 +180,17 @@ export default function Dashboard() {
           >
             <GlobalFilter
               onFilterSubmit={(
+                h3_index: string,
                 iddesa: string,
                 idkec: string,
                 idkab: string,
               ) => {
-                setFilter({ iddesa: iddesa, idkec: idkec, idkab: idkab });
+                setFilter({
+                  h3_index: h3_index,
+                  iddesa: iddesa,
+                  idkec: idkec,
+                  idkab: idkab,
+                });
               }}
             />
           </Card>
@@ -227,9 +238,7 @@ export default function Dashboard() {
                   zoom: 7,
                 }}
               >
-                <H3Layer
-                  {...{ h3_index: '', ...filter}}
-                />
+                <H3Layer {...filter} />
                 <MapLegend />
               </MapProvider>
             </Box>
@@ -266,7 +275,7 @@ export default function Dashboard() {
             lineHeight={{ base: '24px', md: '26px' }}
             fontWeight="500"
           >
-            <Shap />
+            <Shap options={[]} />
           </Card>
         </Flex>
       </Flex>

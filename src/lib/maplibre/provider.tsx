@@ -48,15 +48,17 @@ export default function MapProvider({
   }, []);
 
   useEffect(() => {
-  if (map.current) {
-    (window as any).map = map.current;
-  }
-}, [loaded]);
+    if (map.current) {
+      (window as any).map = map.current;
+    }
+  }, [loaded]);
 
   return (
     <div className="z-[1000]">
-      <MapContext.Provider value={map.current ? { map: map.current, loaded: loaded }: null}>
-        {map.current && loaded ? children: null}
+      <MapContext.Provider
+        value={map.current ? { map: map.current, loaded: loaded } : null}
+      >
+        {map.current && loaded ? children : null}
         {/* {children} */}
       </MapContext.Provider>
       {!loaded && (

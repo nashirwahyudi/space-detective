@@ -10,6 +10,7 @@ export async function GET(req: Request) {
     const idkab = searchParams.get('idkab') || '';
     const idkec = searchParams.get('idkec') || '';
     const iddesa = searchParams.get('iddesa') || '';
+    const h3_index = searchParams.get('h3_index') || '';
     let params: any[] = [];
     let query = `SELECT h3_index, iddesa, idkec, idkab, nmdesa, nmkec, nmkab, ST_AsGeoJSON(geometry)::json as geometry, anomaly_label, anomaly_score_probability FROM map_sumut_with_all_feature WHERE 1=1`;
 
@@ -23,17 +24,23 @@ export async function GET(req: Request) {
       params.push(idkec);
     }
     if (iddesa) {
-      query += ` AND iddes = $${idx++}`;
+      query += ` AND iddesa = $${idx++}`;
       params.push(iddesa);
+    }
+    if (h3_index) {
+      query += ` AND h3_index = $${idx++}`;
+      params.push(h3_index);
     }
     const res = await pool.query(query, params);
     const geojson = {
       type: 'FeatureCollection',
-      features: res.rows.map((row: any) => {
+      features: res.rows.map((row: any, index: number) => {
         return {
+          id: index,
           type: 'Feature',
           geometry: row.geometry,
           properties: {
+            h3_index: row.h3_index,
             iddesa: row.iddesa,
             idkab: row.name,
             idkec: row.idkec,

@@ -16,7 +16,7 @@ export const useFetchMasterWilayah = async (params: URLSearchParams) => {
   }).then(async (res) => await res.json());
 };
 
-export const useFecthShap = async () => {
+export const useFecthShap = async (params: URLSearchParams) => {
   return await fetch('./api/shap', {
     method: 'GET',
     headers: {
