@@ -197,14 +197,6 @@ export default function Chat() {
               >
                 {elem.input}
               </Text>
-              {/* <Icon
-                cursor="pointer"
-                as={MdEdit}
-                ms="auto"
-                width="20px"
-                height="20px"
-                color={gray}
-              /> */}
             </Flex>
           </Flex>
           <Flex w="100%">
@@ -220,8 +212,8 @@ export default function Chat() {
             >
               <Icon
                 as={MdAutoAwesome}
-                width="20px"
-                height="20px"
+                width="40px"
+                height="40px"
                 color="white"
               />
             </Flex>
@@ -232,7 +224,7 @@ export default function Chat() {
         {/* Chat Input */}
         <Flex
           ms={{ base: '0px', xl: '60px' }}
-          mt="0"
+          mt="2"
           justifySelf={'flex-end'}
         >
           <Input

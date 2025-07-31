@@ -15,6 +15,7 @@ import '@/styles/Contact.css';
 import '@/styles/Plugins.css';
 import '@/styles/MiniCalendar.css';
 import AppWrappers from './AppWrappers';
+import Head from './head'
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -22,7 +23,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   useEffect(() => {
     const initialKey = localStorage.getItem('apiKey');
-    console.log(initialKey);
     if (initialKey?.includes('sk-') && apiKey !== initialKey) {
       setApiKey(initialKey);
     }
@@ -30,6 +30,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
   return (
     <html lang="en">
+      <Head></Head>
       <body id={'root'}>
         <AppWrappers>
           {/* <ChakraProvider theme={theme}> */}

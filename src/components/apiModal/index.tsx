@@ -43,7 +43,7 @@ function APIModal(props: { setApiKey: any; sidebar?: boolean }) {
   };
   return (
     <>
-      {sidebar ? (
+      {/* {sidebar ? (
         <Button
           onClick={onOpen}
           display="flex"
@@ -70,7 +70,7 @@ function APIModal(props: { setApiKey: any; sidebar?: boolean }) {
         >
           <Icon w="18px" h="18px" as={MdLock} color={navbarIcon} />
         </Button>
-      )}
+      )} */}
 
       <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
