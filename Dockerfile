@@ -1,8 +1,6 @@
 # ----- Stage 1: Build -----
 FROM alibaba-cloud-linux-3-registry.cn-hangzhou.cr.aliyuncs.com/alinux3/node:20.16 AS builder
 
-ENV NODE_ENV production
-
 # Set working directory
 WORKDIR /app
 
@@ -12,8 +10,6 @@ RUN npm install --legacy-peer-deps
 
 # Copy the rest of the source
 COPY . .
-
-ENV NODE_ENV production
 
 # Build the app
 RUN npm run build
