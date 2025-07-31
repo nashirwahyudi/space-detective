@@ -1,7 +1,6 @@
 'use client';
 /*eslint-disable*/
 
-import { ChatBody, OpenAIModel } from '@/types/types';
 // import Map from '@/components/statistic/Map';
 import MapProvider from '@/lib/maplibre/provider';
 import { Flex, Box, useColorModeValue, Card } from '@chakra-ui/react';

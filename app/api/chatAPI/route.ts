@@ -1,44 +1,25 @@
+import { useSendChat } from '@/components/analytics/data';
+import { getResponseBody, ResponseBody } from '@/types/response-body';
 import { ChatBody } from '@/types/types';
-import { OpenAIStream } from '@/utils/chatStream';
 
 export const runtime = 'edge';
 
-export async function GET(req: Request): Promise<Response> {
+export async function POST(req: Request): Promise<ResponseBody> {
+  const responseBody:ResponseBody = getResponseBody();
   try {
-    const { inputCode, model, apiKey } = (await req.json()) as ChatBody;
-
-    let apiKeyFinal;
-    if (apiKey) {
-      apiKeyFinal = apiKey;
+    const requestBody = (await req.json()) as ChatBody;
+    const response = await useSendChat(requestBody);
+    if (response.success) {
+      console.log(response);
+      responseBody.data = response;
+      return response
     } else {
-      apiKeyFinal = process.env.NEXT_PUBLIC_OPENAI_API_KEY;
+      throw Error(response.message);
     }
 
-    const stream = await OpenAIStream(inputCode, model, apiKeyFinal);
-
-    return new Response(stream);
-  } catch (error) {
-    console.error(error);
-    return new Response('Error', { status: 500 });
-  }
-}
-
-export async function POST(req: Request): Promise<Response> {
-  try {
-    const { inputCode, model, apiKey } = (await req.json()) as ChatBody;
-
-    let apiKeyFinal;
-    if (apiKey) {
-      apiKeyFinal = apiKey;
-    } else {
-      apiKeyFinal = process.env.NEXT_PUBLIC_OPENAI_API_KEY;
-    }
-
-    const stream = await OpenAIStream(inputCode, model, apiKeyFinal);
-
-    return new Response(stream);
-  } catch (error) {
-    console.error(error);
-    return new Response('Error', { status: 500 });
+  } catch (error:any) {
+    responseBody.success = false;
+    responseBody.message = error.message;
+    return responseBody;
   }
 }

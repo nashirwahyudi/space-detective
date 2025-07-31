@@ -12,7 +12,7 @@ export default function MessageBox(props: { output: string }) {
       pl="22px !important"
       color={textColor}
       minH="450px"
-      fontSize={{ base: 'sm', md: 'md' }}
+      fontSize={'xs'}
       lineHeight={{ base: '24px', md: '26px' }}
       fontWeight="500"
     >
